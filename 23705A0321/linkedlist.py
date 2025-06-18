@@ -1,29 +1,31 @@
 class Node:
-    def __init__(self , data):
+    def __init__(self, data):
         self.data = data
-        self.prev = None
         self.next = None
-class double_linked_list:
+
+class LinkedList:
     def __init__(self):
         self.head = None
-    def insert_end(self , data):
+
+    def append(self, data):
         new_node = Node(data)
-        if self.head == None:
+        if not self.head:
             self.head = new_node
-        else:
-            pointer = self.head
-            while pointer.next != None:
-                pointer = pointer.next
-            pointer.next = new_node
-            new_node.prev = pointer
-    def insert_start
-    
-    
-    
-dll = double_linked_list()
-dll.insert_end(10)
-dll.insert_end(20)
-dll.insert_end(30)
-dll.insert_end(40)
-dll.traversal()
-dll.insert_start(50)
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = new_node
+
+    def display_with_addresses(self):
+        current = self.head
+        while current:
+            print(f"[Data: {current.data} | Node Addr: {hex(id(current))} | Next Addr: {hex(id(current.next)) if current.next else None}]")
+            current = current.next
+
+if __name__ == "__main__":
+    ll = LinkedList()
+    ll.append(10)
+    ll.append(20)
+    ll.append(30)
+    ll.display_with_addresses()
